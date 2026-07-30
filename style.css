@@ -1,0 +1,117 @@
+:root {
+    --pink: #ff85a1;
+    --purple: #a29bfe;
+    --gold: #d4af37;
+    --white: #ffffff;
+    --cake-bg: #fce4ec;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body {
+    background: linear-gradient(135deg, #2d3436 0%, #6c5ce7 100%);
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Glassmorphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.scene { display: none; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center; animation: fadeIn 0.8s ease; }
+.scene.active { display: flex; }
+
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+/* Buttons */
+.btn-gold {
+    background: linear-gradient(45deg, #d4af37, #f1c40f);
+    border: none; padding: 12px 30px; border-radius: 50px;
+    color: #000; font-weight: bold; cursor: pointer; transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); margin-top: 20px;
+}
+.btn-primary {
+    background: var(--white); color: #6c5ce7; border: none;
+    padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer;
+}
+
+/* Teddy Scene */
+.teddy-container { display: flex; align-items: center; gap: 30px; margin-bottom: 40px; }
+.teddy { width: 100px; height: 120px; border-radius: 50px 50px 40px 40px; position: relative; }
+.left-teddy { background: #ffb7c5; }
+.right-teddy { background: #a29bfe; }
+.teddy-ear { width: 30px; height: 30px; background: inherit; position: absolute; top: -5px; left: 0; border-radius: 50%; }
+.teddy-ear.right { left: auto; right: 0; }
+.teddy-face { padding-top: 40px; font-size: 14px; font-weight: bold; color: #444; }
+
+/* REAL CAKE STYLING (Scene 4) */
+.cake-stage { position: relative; width: 300px; height: 400px; display: flex; flex-direction: column; align-items: center; }
+.cake-container { position: relative; width: 250px; height: 250px; perspective: 1000px; }
+
+.plate {
+    width: 200px; height: 100px; background: radial-gradient(circle, #eee, #999);
+    border-radius: 50%; position: absolute; bottom: 10px; left: 25px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.cake-3d { position: absolute; bottom: 40px; left: 50px; transform-style: preserve-3d; transition: 1s ease; }
+
+.layer {
+    width: 150px; border-radius: 10px; position: relative;
+    background: linear-gradient(to right, #ff85a1, #ffb7c5, #ff85a1);
+    box-shadow: inset 0 -5px 10px rgba(0,0,0,0.2);
+}
+.layer-bottom { height: 60px; width: 150px; }
+.layer-middle { height: 50px; width: 120px; margin-left: 15px; background: linear-gradient(to right, #fce4ec, #fff, #fce4ec); }
+.layer-top { height: 40px; width: 90px; margin-left: 30px; background: linear-gradient(to right, #ff85a1, #ffb7c5, #ff85a1); }
+
+/* Drips */
+.drip { width: 10px; height: 20px; background: #fff; border-radius: 0 0 10px 10px; position: absolute; top: 0; }
+.drip:nth-child(1) { left: 10px; } .drip:nth-child(2) { left: 50px; height: 30px; } .drip:nth-child(3) { right: 20px; }
+
+/* Candles */
+.candles { position: absolute; top: -30px; width: 100%; display: flex; justify-content: space-around; }
+.candle { width: 6px; height: 30px; background: linear-gradient(to bottom, #ffd700, #d4af37); position: relative; }
+.flame {
+    width: 8px; height: 12px; background: #ff4d4d; border-radius: 50% 50% 20% 20%;
+    position: absolute; top: -12px; left: -1px; animation: flicker 0.1s infinite alternate;
+}
+@keyframes flicker { from { transform: scale(1); opacity: 1; } to { transform: scale(1.2) rotate(5deg); opacity: 0.8; } }
+
+/* Knife */
+.knife-real {
+    width: 120px; height: 15px; background: #bdc3c7;
+    position: absolute; top: 20px; right: -150px;
+    transform: rotate(-30deg); border-radius: 5px 0 0 5px;
+    border-bottom: 2px solid #7f8c8d; transition: 1s ease-in-out; z-index: 10;
+}
+.knife-real.moving { right: 70px; top: 100px; transform: rotate(0deg); }
+
+/* Cake Splitting */
+.split-left { transform: translateX(-30px) rotateY(-20deg); opacity: 0.8; }
+.split-right { transform: translateX(30px) rotateY(20deg); opacity: 0.8; }
+
+/* Letter box */
+.letter-box {
+    background: #fff; color: #333; padding: 40px; width: 90%; max-width: 500px;
+    border-radius: 5px; box-shadow: 10px 10px 0 var(--gold);
+    line-height: 1.8; text-align: left; max-height: 80vh; overflow-y: auto;
+}
+.typing-text { font-size: 1.1rem; white-space: pre-wrap; }
+
+/* Game Area */
+#game-area { width: 100%; height: 70vh; position: relative; overflow: hidden; }
+.heart-drop { position: absolute; font-size: 30px; cursor: pointer; transition: 0.2s; }
+
+#confetti { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999; }
